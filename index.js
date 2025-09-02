@@ -13,5 +13,6 @@ app.use(cors());
 
 //Routes
 app.use('/api/currency', require('./routes/currency.route'));
+app.use('/api/withdraw', require('./routes/withdraw.route'));
 
 app.listen(process.env.APP_PORT, () => console.log('Running in port:' + process.env.APP_PORT));
