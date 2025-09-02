@@ -87,8 +87,32 @@ const updateCurrency = async(request, response) =>{
     }
 }
 
+const getTotalAmount = async (request, response) => {
+  try {
+    const inventory = await Currency.find();
+
+    const total = inventory.reduce((acc, curr) => acc + curr.denomination * curr.quantity, 0);
+
+    return response.json({
+      ok: true,
+      total,
+      msg: `Total money available in the ATM is $${total}`
+    });
+
+  } catch (error) {
+
+    console.error(error);
+    response.status(500).json({
+      ok: false,
+      msg: error.message,
+    });
+
+  }
+};
+
 module.exports = {
     createCurrency,
     getCurrencies,
-    updateCurrency
+    updateCurrency,
+    getTotalAmount
 }

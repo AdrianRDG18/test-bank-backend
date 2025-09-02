@@ -4,7 +4,7 @@
 
 const { Router } = require('express');
 const { check } = require('express-validator');
-const { getCurrencies, createCurrency, updateCurrency } = require('../controllers/currency.controller');
+const { getCurrencies, createCurrency, updateCurrency, getTotalAmount } = require('../controllers/currency.controller');
 const { fieldsValidator } = require('../middlewares/fields-validator');
 
 const router = Router();
@@ -22,5 +22,7 @@ router.put('/:id', [
     check('id', 'The id must be a valid id').isMongoId(),
     fieldsValidator
 ], updateCurrency);
+
+router.get('/get-total', [], getTotalAmount);
 
 module.exports = router;
